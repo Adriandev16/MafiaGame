@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="MafiaGame.Controls.ActivityIndicatorPopupPro"
+           Color="Transparent"
+           Size="140,140"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           x:Name="currentPopup">
+    
+    <Frame CornerRadius="10"  
+           BackgroundColor="White">
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand" >
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               Color="Black"
+                               HorizontalOptions="CenterAndExpand" 
+                               VerticalOptions="CenterAndExpand" />
+            <Label Text="{Binding Title}"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </Frame>
+</mct:Popup>

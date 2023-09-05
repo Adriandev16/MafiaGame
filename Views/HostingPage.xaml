@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:MafiaGame.Utils"
+             x:Class="MafiaGame.Views.HostingPage"
+             xmlns:vm="clr-namespace:MafiaGame.ViewModels"
+             xmlns:controls="clr-namespace:MafiaGame.Controls"
+             xmlns:model="clr-namespace:MafiaGame.InternalModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="vm:HostingPageViewModel">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Content>
+        <Frame BorderColor="Red">
+            <Grid RowDefinitions="auto, *, auto" ColumnDefinitions="auto, *" RowSpacing="10">
+                <Label Text="{Binding LobbyTitle}" 
+                   HorizontalOptions="CenterAndExpand"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   FontSize="Large"/>
+
+                <CollectionView Grid.Row="1" Grid.Column="1" 
+                                ItemsSource="{Binding Players}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:PlayerDetails">
+                            <Grid BackgroundColor="LightGray">
+                                <Label Margin="0,5,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{x:Static fontawesome:FontAwesomeIcons.FaUser}" 
+                                                  FontFamily="FontAwesomeRegular"
+                                                  FontSize="40"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="{Binding PlayerName}"
+                                       TextColor="Black"
+                                       FontSize="40"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="Center" />
+                                
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+                <controls:ActivityIndicator Grid.Row="2" Grid.Column="1"
+                                            VerticalOptions="EndAndExpand"
+                                            IsActive="True"
+                                            LoadingText="Waiting for other players to join.. (at least 6)"/>
+
+                <Button Grid.Row="2" Grid.Column="1"
+                        Text="Start Game"
+                        IsVisible="False"/>
+            </Grid>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

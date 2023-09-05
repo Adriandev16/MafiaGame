@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontawesome="clr-namespace:MafiaGame.Utils"
+             xmlns:controls="clr-namespace:MafiaGame.Controls"
+             x:Class="MafiaGame.Views.MainPage"
+             xmlns:vm="clr-namespace:MafiaGame.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="vm:MainPageViewModel"
+             Title="Mafia">
+
+    <VerticalStackLayout Spacing="25"
+                         Padding="30,0"
+                         VerticalOptions="Center">
+
+        <controls:ActivityIndicatorExp IsActive="{Binding IsBusy}" IsVisible="{Binding IsBusy}" LoadingText="Please Wait.."/>
+
+        <Label VerticalOptions="StartAndExpand"
+               HorizontalOptions="CenterAndExpand">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static fontawesome:FontAwesomeIcons.FaUserSecret}" 
+                          FontFamily="FontAwesomeRegular"
+                          FontSize="105"/>
+                    <Span Text="  "/>
+                    <Span Text="Mafia" FontSize="56"
+                          FontAttributes="Bold"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Entry Text="{Binding PlayerName}"
+               Placeholder="Player Name"
+               PlaceholderColor="Black"
+               BackgroundColor="LightGray"/>
+
+        <Entry Text="{Binding GameName}"
+               Placeholder="Game Name"
+               PlaceholderColor="Black"
+               BackgroundColor="LightGray"/>
+
+        <Button Text="Host a New Game"
+                Command="{Binding HostGameCommand}"/>
+
+        <Button Text="Join a Game"
+                Command="{Binding JoinGameCommand}"/>
+
+        <Label VerticalOptions="EndAndExpand"
+               HorizontalOptions="CenterAndExpand"
+               IsVisible="{Binding IsWarningLabelVisible}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static fontawesome:FontAwesomeIcons.FaInfoCircle}" 
+                          FontFamily="FontAwesomeRegular"
+                          TextColor="DarkRed"
+                          FontSize="13"/>
+                    <Span Text="  "/>
+                    <Span Text="You must enter player name and game name" 
+                          FontSize="13"
+                          FontAttributes="Bold"
+                          TextColor="DarkRed"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </VerticalStackLayout>
+
+</ContentPage>
